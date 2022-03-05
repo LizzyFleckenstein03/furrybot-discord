@@ -1,0 +1,25 @@
+{
+  "name": "furrybot-discord",
+  "version": "1.0.0",
+  "description": "Furrybot ported to discord.js",
+  "main": "init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EliasFleckenstein03/furrybot-discord.git"
+  },
+  "author": "EliasFleckenstein03",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/EliasFleckenstein03/furrybot-discord/issues"
+  },
+  "homepage": "https://github.com/EliasFleckenstein03/furrybot-discord#readme",
+  "dependencies": {
+    "discord.js": "^14.0.0-dev.1646395406.6f7a366",
+    "free-google-images": "^1.0.4",
+    "node-fetch": "^2.0.0",
+    "pseudo-random": "^0.6.0"
+  }
+}
