@@ -22,7 +22,7 @@ module.exports = {
 			.then(data => {
 				let def = data[0]
 				msg.reply(`__**${def.word}**__`
-					+ (def.phonetic ? ` (_${def.phonetic}_)` : "")
+					+ (def.phonetic ? ` _${def.phonetic}_` : "")
 					+ "\n\n"
 					+ Object.entries(def.meaning).reduce((str, meaning) => str
 						+ `_${meaning[0]}_\n`
@@ -58,34 +58,24 @@ module.exports = {
 					.then(res => res.text())
 					.then(data => msg.channel.send(`<@!${target}> ${data}`))
 		}
+	},
+	joke: {
+		func: (msg, [first, last]) => {
+			if (!first) {
+				first = "Chuck"
+				last = "Norris"
+			} else if (!last) {
+				last = ""
+			}
+
+			fetch(`http://api.icndb.com/jokes/random?firstName=${first}&lastName=${last}`)
+				.then(res => res.json())
+				.then(data => msg.reply(data.value.joke.replace(/&quot;/g, "\"").replace(/  /g, " ")))
+		}
+	},
+	"8ball": {
+		func: msg => fetch("https://8ball.delegator.com/magic/JSON/whatever")
+			.then(res => res.json())
+			.then(data => msg.reply(data.magic.answer))
 	}
 }
-/*
-
-furrybot.commands.joke = {
-	func = function(name, first, last)
-		if not first then
-			first = "Chuck"
-			last = "Norris"
-		elseif not last then
-			last = ""
-		end
-		furrybot.json_http_request("http://api.icndb.com/jokes/random?firstName=" .. first .. "&lastName=" .. last, name, function(data)
-			local joke = data.value.joke:gsub("&quot;", "\""):gsub("  ", " ")
-			furrybot.send(joke, furrybot.colors.fun)
-		end)
-	end,
-}
-
-furrybot.commands["8ball"] = {
-	func = function(name)
-		furrybot.json_http_request("https://8ball.delegator.com/magic/JSON/anything", name, function(data)
-			furrybot.ping_message(name, data.magic.answer, furrybot.colors.fun)
-		end)
-	end,
-}
-
-return function(_http, _env, _storage)
-	http, env, storage = _http, _env, _storage
-end
-*/
