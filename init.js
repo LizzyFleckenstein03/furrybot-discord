@@ -24,23 +24,20 @@ client.on("messageCreate", msg => {
 			if (def.operator && !fb.operators[msg.author.id])
 				msg.reply(`Sorry, you need to be an operator run this command: ${cmd}`)
 			else
-				def.func(msg, args)
+				def.func(msg, args, fb)
 		} else {
 			msg.reply(`Invalid command: ${cmd}`)
 		}
 	}
 })
 
-//const modules = ["nsfw", "random", "operator"]
-const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu"]
+//const modules = ["nsfw", "random"]
+const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu", "operator"]
 
 for (let f of modules) {
 	let m = require(`./${f}.js`)
 
 	if (m)
 		for (let k in m)
-			if (k != "__init")
-				fb.commands[k] = m[k]
-
-	m?.__init?.(fb)
+			fb.commands[k] = m[k]
 }

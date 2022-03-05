@@ -2,7 +2,7 @@ module.exports = {
 	help: {
 		params: "[<command>]",
 		help: "Display help for a commands or show list of available commands",
-		func: (msg, [cmd]) => {
+		func: (msg, [cmd], {commands}) => {
 			if (cmd) {
 				let def = commands[cmd]
 

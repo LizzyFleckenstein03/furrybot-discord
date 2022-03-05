@@ -60,7 +60,7 @@ module.exports.interactiveRoleplayCommand = (help, action) => new Object({
 
 module.exports.storageLoad = name => {
 	try {
-		return require(`storage/${name}.json`)
+		return require(`./storage/${name}.json`)
 	} catch {}
 }
 
@@ -82,20 +82,20 @@ module.exports.chooseWeighted = (arr, rng = Math) => {
 
 module.exports.listCommand = (title, list) => new Object({
 	help: "Show list of " + title,
-	func: msg => msg.reply(`List of ${title}: ${Object.keys(list).join(", ")}`)
+	func: (msg, _, fb) => msg.reply(`List of ${title}: ${Object.keys(fb[list]).map(entry => "<@!" + entry + ">").join(", ")}`)
 })
 
-module.exports.listChangeCommand = (action, list, listName, status) => new Object({
+module.exports.listChangeCommand = (action, list, status) => new Object({
 	operator: true,
-	func: (msg, [targetPing]) => {
+	func: (msg, [targetPing], fb) => {
 		const target = getPing(msg, targetPing, true)
 
 		if (target) {
-			if (list[target] == status) {
+			if (fb[list][target] == status) {
 				msg.reply(`<@!${target}> ${status ? "already" : "not"} ${action}.`)
 			} else {
-				list[target] = status
-				module.exports.storageSave(listName, list)
+				fb[list][target] = status
+				module.exports.storageSave(list, fb[list])
 				msg.reply(`Successfully ${action} <@!${target}>.`)
 			}
 		}

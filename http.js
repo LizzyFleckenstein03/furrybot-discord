@@ -13,7 +13,7 @@ module.exports = {
 	verse: {
 		func: msg => fetch("https://labs.bible.org/api/?type=json&passage=random")
 			.then(res => res.json())
-			.then(data => msg.reply(`${data[0].text} [${data[0].bookname} ${data[0].chapter}, ${data[0].verse}]`))
+			.then(data => msg.reply(`${data[0].text}\n\t${data[0].bookname} ${data[0].chapter}, ${data[0].verse}`))
 	},
 	define: {
 		func: (msg, term) => term.length > 0 ? fetch("https://api.dictionaryapi.dev/api/v1/entries/en_US/" + term.join(" "))

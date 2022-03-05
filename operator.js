@@ -1,9 +1,10 @@
-let operators, ignored
+const common = require("./common.js")
 
-furrybot.list_change_command("op", "operators", "an operator", true)
-furrybot.list_change_command("deop", "operators", "an operator", nil)
-furrybot.list_command("oplist", "operators", "operators")
-
-furrybot.list_change_command("ignore", "ignored", "ignored", true)
-furrybot.list_change_command("unignore", "ignored", "ignored", nil)
-furrybot.list_command("ignorelist", "ignored", "ignored players")
+module.exports = {
+	op: common.listChangeCommand("oped", "operators", true),
+	deop: common.listChangeCommand("oped", "operators", false),
+	oplist: common.listCommand("operators", "operators"),
+	ignore: common.listChangeCommand("ignored", "ignored", true),
+	unignore: common.listChangeCommand("ignored", "ignored", false),
+	ignorelist: common.listCommand("ignored users", "ignored"),
+}
