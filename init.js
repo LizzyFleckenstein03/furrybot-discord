@@ -24,14 +24,14 @@ client.on("messageCreate", msg => {
 			if (def.operator && !fb.operators[msg.author.id])
 				msg.reply(`Sorry, you need to be an operator run this command: ${cmd}`)
 			else
-				def.func(msg, args, fb)
+				def.func(msg, args)
 		} else {
 			msg.reply(`Invalid command: ${cmd}`)
 		}
 	}
 })
 
-//const modules = ["nsfw", "random", "http", "operator"]
+//const modules = ["nsfw", "random", "operator"]
 const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu"]
 
 for (let f of modules) {
@@ -39,5 +39,8 @@ for (let f of modules) {
 
 	if (m)
 		for (let k in m)
-			fb.commands[k] = m[k]
+			if (k != "__init")
+				fb.commands[k] = m[k]
+
+	m?.__init?.(fb)
 }

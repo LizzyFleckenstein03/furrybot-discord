@@ -6,10 +6,9 @@ module.exports = {
 	google: {
 		params: "<keyword> [...]",
 		help: "Google Image Search",
-		func: (msg, keywords) => {
-			google_images.searchRandom(keywords.join(" "))
+		func: (msg, keywords) =>
+			google_images.searchRandom(keywords.join(" "), true)
 				.then(result => msg.reply(result.image.url))
-		}
 	},
 	verse: {
 		func: msg => fetch("https://labs.bible.org/api/?type=json&passage=random")
@@ -17,7 +16,7 @@ module.exports = {
 			.then(data => msg.reply(`${data[0].text} [${data[0].bookname} ${data[0].chapter}, ${data[0].verse}]`))
 	},
 	define: {
-		func: (msg, [word]) => word ? fetch("https://api.dictionaryapi.dev/api/v1/entries/en_US/" + word)
+		func: (msg, term) => term.length > 0 ? fetch("https://api.dictionaryapi.dev/api/v1/entries/en_US/" + term.join(" "))
 			.then(res => res.json())
 			.then(data => {
 				let def = data[0]
@@ -35,7 +34,7 @@ module.exports = {
 			: msg.reply("You need to specify a word")
 	},
 	urban: {
-		func: (msg, [word]) => word ? fetch("https://api.urbandictionary.com/v0/define?term=" + word)
+		func: (msg, term) => term.length > 0 ? fetch("https://api.urbandictionary.com/v0/define?term=" + term.join(" "))
 			.then(res => res.json())
 			.then(data => {
 				let def = common.choose(data.list)
