@@ -1,35 +1,36 @@
-local http, env, storage
-local C = minetest.get_color_escape_sequence
+const pseudoRandom = require("pseudo-random")
+const common = require("./common.js")
 
-function furrybot.get_ascii_genitals(name, begin, middle, ending, seed)
-	return begin .. furrybot.repeat_string(middle, furrybot.strrandom(name, seed, 2, 10)) .. ending
-end
+const asciiGenital = (id, begin, middle, ending) => 
+	begin + middle.repeat(2 + Math.floor(pseudoRandom(id).random() * (10 - 2 + 1))) + ending
 
-function furrybot.get_ascii_dick(name)
-	return minetest.rainbow(furrybot.get_ascii_genitals(name, "8", "=", "D", 31242))
-end
+const asciiDick = id => asciiGenital(id + 1, "8", "=", "D")
+const asciiBoob = id => asciiGenital(id + 2, "E", "Ξ", "3")
 
-function furrybot.get_ascii_boobs(name)
-	return furrybot.get_ascii_genitals(name, "E", "Ξ", "3", 31243)
-end
+module.exports = {
+	dicksize: {
+		params: "[<player>]",
+		help: "Display the size of your own or another users's dick",
+		func: (msg, [targetPing]) => {
+			const target = targetPing ? common.getPing(targetPing) : msg.author.id
 
-furrybot.commands.dicksize = {
-	params = "[<player>]",
-	help = "Display the size of your own or another player's dick",
-	func = function(name, target)
-		target = target or name
-		furrybot.send(furrybot.get_ascii_dick(target) .. furrybot.colors.system .. "   ← " .. furrybot.ping(target, furrybot.colors.system) .. "'s Dick", furrybot.colors.system)
-	end,
+			if (target)
+				msg.reply(`${asciiDick(target)}    ← <@!${targe}>'s Dick'`)
+		}
+	},
+	boobsize: {
+		params: "[<player>]",
+		help: "Display the size of your own or another users's boobs",
+		func: (msg, [targetPing]) => {
+			const target = targetPing ? common.getPing(targetPing) : msg.author.id
+
+			if (target)
+				msg.reply(`${asciiBoob(target)}    ← <@!${targe}>'s Boobs'`)
+		}
+	},
 }
 
-furrybot.commands.boobsize = {
-	params = "[<player>]",
-	help = "Display the size of your own or another player's boobs",
-	func = function(name, target)
-		target = target or name
-		furrybot.send(furrybot.get_ascii_boobs(target) .. furrybot.colors.system .. "   ← " .. furrybot.ping(target, furrybot.colors.system) .. "'s Boobs", furrybot.colors.system)
-	end,
-}
+/*
 
 furrybot.request_command("smellfeet", "smell another player's feet", function(name, target)
 	furrybot.ping_message(target, name .. " wants to smell your feet. Type !accept to accept or !deny to deny.", furrybot.colors.system)
@@ -55,7 +56,4 @@ furrybot.commands.cum = {
 		furrybot.send(name .. " is cumming: " .. furrybot.get_ascii_dick(name) .. C("#FFFFFF") .. furrybot.repeat_string("~", math.random(1, 10)), furrybot.colors.roleplay)
 	end
 }
-
-return function(_http, _env, _storage)
-	http, env, storage = _http, _env, _storage
-end
+*/

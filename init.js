@@ -17,7 +17,7 @@ let fb = {
 client.on("messageCreate", msg => {
 	if (msg.author.id != client.user.id && msg.content.startsWith("!") && !fb.ignored[msg.author.id]) {
 		let args = msg.content.slice(1).split(" ")
-		let cmd = args.shift()
+		let cmd = common.stripPings(args.shift())
 		let def = fb.commands[cmd]
 
 		if (def) {
@@ -31,8 +31,8 @@ client.on("messageCreate", msg => {
 	}
 })
 
-//const modules = ["nsfw", "random"]
-const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu", "operator"]
+//const modules = ["random"]
+const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu", "operator", "nsfw"]
 
 for (let f of modules) {
 	let m = require(`./${f}.js`)
