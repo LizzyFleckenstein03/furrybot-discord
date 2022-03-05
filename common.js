@@ -102,8 +102,5 @@ module.exports.listChangeCommand = (action, list, status) => new Object({
 	}
 })
 
-module.exports.stripPings = str => str
-	.replace(/<@!/g, "<@​!")
-	.replace(/<@&/g, "<@​&")
-	.replace(/@here/g, "@​here")
-	.replace(/@everyone/g, "@​everyone")
+module.exports.stripPings = str => str.replace(/@/g, "\@")
+

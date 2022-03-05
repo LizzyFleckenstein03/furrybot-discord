@@ -15,7 +15,7 @@ module.exports = {
 			const target = targetPing ? common.getPing(targetPing) : msg.author.id
 
 			if (target)
-				msg.reply(`${asciiDick(target)}    ← <@!${targe}>'s Dick'`)
+				msg.reply(`${asciiDick(target)}    ← <@!${target}>'s Dick'`)
 		}
 	},
 	boobsize: {
@@ -25,7 +25,7 @@ module.exports = {
 			const target = targetPing ? common.getPing(targetPing) : msg.author.id
 
 			if (target)
-				msg.reply(`${asciiBoob(target)}    ← <@!${targe}>'s Boobs'`)
+				msg.reply(`${asciiBoob(target)}    ← <@!${target}>'s Boobs'`)
 		}
 	},
 }
