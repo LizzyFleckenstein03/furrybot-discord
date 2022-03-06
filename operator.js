@@ -12,5 +12,11 @@ module.exports = {
 		help: "Change the bot's username",
 		params: "<username>",
 		func: (msg, name) => msg.guild.me.setNickname(name.join(" ")),
-	}
+	},
+	pfp: {
+		operator: true,
+		help: "Change the bot's pfp",
+		params: "<pfp>",
+		func: (msg, pfp) => msg.guild.me.user.setAvatar(pfp.join(" ")),
+	},
 }
