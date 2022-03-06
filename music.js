@@ -5,7 +5,7 @@ module.exports = {
 	play: {
 		func: (msg, url) => {
 			const channel = msg.member.voice.channel
-			
+
 			if (! channel)
 				return msg.reply("Join a voice channel you fucking moron")
 
@@ -14,12 +14,9 @@ module.exports = {
 				guildId: channel.guild.id,
 				adapterCreator: channel.guild.voiceAdapterCreator,
 			})
-	        
-			const stream = ytdl(url.join(" "), {filter: "audioonly"})
-			const resource = voice.createAudioResource(stream, {inputType: voice.StreamType.Arbitrary})
 			const player = voice.createAudioPlayer()
-			        
-			player.play(resource)
+
+			player.play(voice.createAudioResource(ytdl(url.join(" "), {filter: "audioonly"}), {inputType: voice.StreamType.Arbitrary}))
 			conn.subscribe(player)
 		}
 	}
