@@ -12,7 +12,7 @@ module.exports = {
 		params: "[<player>]",
 		help: "Display the size of your own or another users's dick",
 		func: (msg, [targetPing]) => {
-			const target = targetPing ? common.getPing(targetPing) : msg.author.id
+			const target = targetPing ? common.getPing(msg, targetPing, true) : msg.author.id
 
 			if (target)
 				msg.reply(`${asciiDick(target)}    ← <@!${target}>'s Dick'`)
@@ -22,7 +22,7 @@ module.exports = {
 		params: "[<player>]",
 		help: "Display the size of your own or another users's boobs",
 		func: (msg, [targetPing]) => {
-			const target = targetPing ? common.getPing(targetPing) : msg.author.id
+			const target = targetPing ? common.getPing(msg, targetPing, true) : msg.author.id
 
 			if (target)
 				msg.reply(`${asciiBoob(target)}    ← <@!${target}>'s Boobs'`)
