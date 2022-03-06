@@ -16,6 +16,9 @@ let fb = {
 	ignored: common.storageLoad("ignored") || [],
 }
 
+
+client.on("ready", _ => client.user.setActivity("Leftist propaganda"))
+
 client.on("messageCreate", msg => {
 	if (fb.ignored[msg.author.id] || msg.author.id == client.user.id)
 		return;
