@@ -11,6 +11,7 @@ module.exports = {
 				new URL(url)
 			} catch {
 				url = "https://youtube.com/watch?v=" + (await youtubeSearchApi.GetListByKeyword(url, false, 1)).items[0].id
+				msg.reply("Playing this: " + url)
 			}
 
 			const channel = msg.member.voice.channel
