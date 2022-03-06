@@ -4,7 +4,7 @@ const copypasta = require("./copypasta.json")
 const copypastaTrigger = require("./copypasta.js")
 
 const client = module.exports = new Discord.Client({
-	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages]
+	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages, Discord.GatewayIntentBits.GuildVoiceStates]
 })
 
 client.login(process.env.DISCORD_TOKEN)
@@ -40,7 +40,7 @@ client.on("messageCreate", msg => {
 	}
 })
 
-const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu", "operator", "nsfw", "random"]
+const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu", "operator", "nsfw", "random", "music"]
 
 for (let f of modules) {
 	let m = require(`./${f}.js`)

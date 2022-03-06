@@ -17,10 +17,13 @@
   },
   "homepage": "https://github.com/EliasFleckenstein03/furrybot-discord#readme",
   "dependencies": {
+    "@discordjs/voice": "^0.9.0-dev.1646395401.6f7a366",
     "discord.js": "^14.0.0-dev.1646395406.6f7a366",
     "free-google-images": "^1.0.4",
     "node-fetch": "^2.0.0",
     "pseudo-random": "^0.6.0",
-    "sha1": "^1.1.1"
+    "sha1": "^1.1.1",
+    "sodium": "^3.0.2",
+    "ytdl-core": "^4.11.0"
   }
 }
