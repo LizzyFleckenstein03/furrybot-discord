@@ -7,4 +7,10 @@ module.exports = {
 	ignore: common.listChangeCommand("ignored", "ignored", true),
 	unignore: common.listChangeCommand("ignored", "ignored", false),
 	ignorelist: common.listCommand("ignored users", "ignored"),
+	nickname: {
+		operator: true,
+		help: "Change the bot's username",
+		params: "<username>",
+		func: (msg, name) => msg.guild.me.setNickname(name.join(" ")),
+	}
 }
