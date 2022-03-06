@@ -1,6 +1,14 @@
-local http, env, storage
-local C = minetest.get_color_escape_sequence
+const common = require("./common.js")
 
+module.exports = {
+	rolldice: {
+		func: msg => msg.channel.send(`<@!${msg.author.id}> rolled a dice and got a ${1 + Math.floor(Math.random() * 6)}.`)
+	},
+	coinflip: {
+		func: msg => msg.channel.send(`<@!${msg.author.id}> flipped a coin and got ${common.choose(["Heads", "Tails"])}.`)
+	}
+}
+/*
 furrybot.commands.rolldice = {
 	func = function(name)
 		furrybot.ping_message(name, "rolled a dice and got a " .. furrybot.random(1, 6, furrybot.colors.system) .. ".", furrybot.colors.system)
@@ -126,7 +134,4 @@ furrybot.commands.video = {
 		furrybot.ping_message(name, "https://youtube.com/watch?v=dQw4w9WgXcQ", furrybot.colors.system)
 	end,
 }
-
-return function(_http, _env, _storage)
-	http, env, storage = _http, _env, _storage
-end
+*/

@@ -2,8 +2,8 @@ const fs = require("fs")
 const google_images = require("free-google-images")
 
 const getPing = module.exports.getPing = (msg, ping, allowSelf) => {
-	if (ping && ping.startsWith("<@!") && ping.endsWith(">")) {
-		const id = ping.slice("<@!".length, -">".length)
+	if (ping && ping.startsWith("<\\@!") && ping.endsWith(">")) {
+		const id = ping.slice("<\\@!".length, -">".length)
 
 		if (!allowSelf && id == msg.author.id) {
 			msg.reply("Please mention a user other than yourself")
@@ -104,5 +104,3 @@ module.exports.listChangeCommand = (action, list, status) => new Object({
 		}
 	}
 })
-
-module.exports.stripPings = str => str.replace(/@/g, "\@")
