@@ -58,7 +58,7 @@ module.exports = {
 					.then(data => msg.channel.send(`<@!${target}> ${data}`))
 		}
 	},
-	joke: {
+	chucknorris: {
 		func: (msg, [first, last]) => {
 			if (!first) {
 				first = "Chuck"
@@ -71,6 +71,11 @@ module.exports = {
 				.then(res => res.json())
 				.then(data => msg.reply(data.value.joke.replace(/&quot;/g, "\"").replace(/  /g, " ")))
 		}
+	},
+	joke: {
+		func: msg => fetch("https://v2.jokeapi.dev/joke/Any")
+			.then(res => res.json())
+			.then(data => msg.reply(data.type == "single" ? data.joke : data.setup + "\n" + "||" + data.delivery + "||"))
 	},
 	"8ball": {
 		func: msg => fetch("https://8ball.delegator.com/magic/JSON/whatever")
