@@ -9,7 +9,7 @@ const getPing = module.exports.getPing = (msg, ping, allowSelf) => {
 			msg.reply("Please mention a user other than yourself")
 			return
 		}
-		
+
 		if (msg.guild.members.cache.get(id))
 			return id
 	}
@@ -19,24 +19,27 @@ const getPing = module.exports.getPing = (msg, ping, allowSelf) => {
 
 module.exports.uppercase = str => str.slice(0, 1).toUpperCase() + str.slice(1)
 
-module.exports.requestCommand = (help, onRequest, onAccept) => new Object({
+module.exports.requestCommand = (help, info, onRequest, onAccept) => new Object({
 	params: "<player>",
-	help: "Request to " + help + " another user",
+	help: "Request to " + help,
 	func: (msg, [targetPing], {requests}) => {
 		const target = getPing(msg, targetPing, false)
 
 		if (target) {
 			const err = onRequest(msg, target)
 
-			if (err)
+			if (err) {
 				msg.reply(err)
-			else
+			} else {
+				msg.channel.send(`<@!${target}>: <@!${msg.author.id}> ${info}. Type !accept to accept or !deny to deny.`)
+
 				requests[target] = {
 					origin: msg.author.id,
 					func: onAccept,
 				}
+			}
 		}
-			
+
 	}
 })
 
@@ -103,4 +106,3 @@ module.exports.listChangeCommand = (action, list, status) => new Object({
 })
 
 module.exports.stripPings = str => str.replace(/@/g, "\@")
-

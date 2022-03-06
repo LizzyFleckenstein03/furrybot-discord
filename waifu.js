@@ -102,7 +102,7 @@ const waifu = id => {
 	}
 }
 
-const formatWaifu = waifu => 
+const formatWaifu = waifu =>
 `__**${waifu.name}**__
 	**Age:** ${waifu.age || "Unknown"}
 	**Gender:** ${waifu.gender}

@@ -3,15 +3,13 @@ const google_images = require("free-google-images")
 let marriages = common.storageLoad("marriages") || {}
 
 module.exports = {
-	marry: common.requestCommand("marry another user", (msg, target) => {
+	marry: common.requestCommand("marry another user", "is proposing to you", (msg, target) => {
 		const origin = msg.author.id
-	
+
 		if (marriages[origin])
 			return `You are already married to <@!${marriages[origin]}>.`
 		else if (marriages[target])
 			return `<@!${target}> is already married to <@!${marriages[target]}>.`
-		else
-			msg.channel.send(`<@!${target}>: <@!${origin}> is proposing to you. Type !accept to accept or !deny to deny.`)
 	}, (msg, origin) => {
 		const target = msg.author.id
 

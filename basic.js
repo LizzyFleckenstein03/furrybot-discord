@@ -6,7 +6,7 @@ module.exports = {
 		help: "Display help for a commands or show list of available commands",
 		func: (msg, [cmd], {commands}) => {
 			cmd = cmd && common.stripPings(cmd)
-			
+
 			if (cmd) {
 				let def = commands[cmd]
 

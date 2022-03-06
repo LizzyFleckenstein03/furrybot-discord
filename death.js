@@ -21,7 +21,7 @@ module.exports = {
 	},
 	die: {
 		func: msg => {
-			google_images.searchRandom("die+meme")	
+			google_images.searchRandom("die+meme")
 				.then(result => msg.channel.send(util.format(common.choose(deathmessages), `<@!${msg.author.id}>`) + `\n${result.image.url}`))
 		}
 	},
