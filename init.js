@@ -1,5 +1,7 @@
 const Discord = require("discord.js")
 const common = require("./common.js")
+const copypasta = require("./copypasta.json")
+const copypastaTrigger = require("./copypasta.js")
 
 const client = module.exports = new Discord.Client({
 	intents: [Discord.GatewayIntentBits.Guilds, Discord.GatewayIntentBits.GuildMessages]
@@ -15,7 +17,14 @@ let fb = {
 }
 
 client.on("messageCreate", msg => {
-	if (msg.author.id != client.user.id && msg.content.startsWith("!") && !fb.ignored[msg.author.id]) {
+	if (fb.ignored[msg.author.id] || msg.author.id == client.user.id)
+		return;
+
+	const trigger = copypastaTrigger(msg.content.toLowerCase())
+	if (trigger)
+		return msg.reply(copypasta[trigger])
+
+	if (msg.content.startsWith("!")) {
 		let args = msg.content.replace(/@/g, "\\@").slice(1).split(" ")
 		let cmd = args.shift()
 		let def = fb.commands[cmd]
