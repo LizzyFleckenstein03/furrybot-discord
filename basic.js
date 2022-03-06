@@ -21,7 +21,7 @@ module.exports = {
 				else
 					msg.reply(`Invalid command: ${cmd}`)
 			} else {
-				msg.reply("Available commands:\n\t" + Object.keys(commands).join("\n\t"))
+				msg.reply("Available commands:\n\n" + Object.keys(commands).sort().join(", "))
 			}
 		},
 	},
