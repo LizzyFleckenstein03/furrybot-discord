@@ -6,62 +6,30 @@ module.exports = {
 	},
 	coinflip: {
 		func: msg => msg.channel.send(`<@!${msg.author.id}> flipped a coin and got ${common.choose(["Heads", "Tails"])}.`)
-	}
+	},
+	choose: {
+		func: (msg, options) => msg.reply(options.length < 2 ? "Not enough options" : `I choose ${common.choose(options)}.`)
+	},
+	uwu: {
+		func: msg => msg.reply(
+			new Array(1 + Math.floor(Math.random() * 10))
+			.fill(null)
+			.map(_ => new Array(3)
+				.fill(common.choose(["u", "ü", "o", "ö"])[common.choose(["toUpperCase", "toLowerCase"])]())
+				.fill("w"[common.choose(["toUpperCase", "toLowerCase"])](), 1, 2)
+				.join("")
+			)
+			.join(" ")
+		)
+	},
+	/*extinct: {
+		func: (msg, [rawSpecies]) => {
+			const species = common.uppercase(rawSpecies + (rawSpecies.slice(-1) == "s" ? "" : "s"))
+			msg.reply(`${species} are ${"extinct"}`)
+		}
+	}*/
 }
 /*
-furrybot.commands.rolldice = {
-	func = function(name)
-		furrybot.ping_message(name, "rolled a dice and got a " .. furrybot.random(1, 6, furrybot.colors.system) .. ".", furrybot.colors.system)
-	end,
-}
-
-furrybot.commands.coinflip = {
-	func = function(name)
-		furrybot.ping_message(name, "flipped a coin and got " .. furrybot.choose({"Heads", "Tails"}, furrybot.colors.system) .. ".", furrybot.colors.system)
-	end,
-}
-
-furrybot.commands.choose = {
-	func = function(name, ...)
-		local options = {...}
-		if #options > 1 then
-			furrybot.ping_message(name, "I choose " .. furrybot.choose(options, "", furrybot.colors.system) .. ".", furrybot.colors.system)
-		else
-			furrybot.error_message(name, "Not enough options")
-		end
-	end,
-}
-
-furrybot.commands.uwu = {
-	func = function()
-		local msg = ""
-
-		local m = math.random(10)
-
-		for i = 1, m do
-			local u_list = {"u", "ü", "o", "ö"}
-
-			local u = u_list[math.random(#u_list)]
-			local w = "w"
-
-			if math.random() < 0.5 then
-				u = u:upper()
-			end
-
-			if math.random() < 0.5 then
-				w = w:upper()
-			end
-
-			msg = msg .. u .. w .. u
-
-			if i ~= m then
-				msg = msg .. " "
-			end
-		end
-
-		furrybot.send(msg, furrybot.colors.system)
-	end,
-}
 
 furrybot.commands.extinct = {
 	func = function(name, species)
