@@ -81,5 +81,21 @@ module.exports = {
 		func: msg => fetch("https://8ball.delegator.com/magic/JSON/whatever")
 			.then(res => res.json())
 			.then(data => msg.reply(data.magic.answer))
+	},
+	emojify: {
+		func: (msg, text) => fetch("https://api.emojify.net/convert", {
+				method: "POST",
+				headers: {
+					"Accept": "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					density: 100,
+					input: text.join(" "),
+					shouldFilterEmojis: false,
+				}),
+			})
+				.then(res => res.json())
+				.then(data => msg.reply(data.result))
 	}
 }
