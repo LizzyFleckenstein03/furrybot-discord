@@ -43,7 +43,7 @@ client.on("messageCreate", msg => {
 	}
 })
 
-const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu", "operator", "nsfw", "random", "music"]
+const modules = ["basic", "bullshit", "marriage", "http", "roleplay", "death", "economy", "waifu", "operator", "nsfw", "random", "music", "badapple"]
 
 for (let f of modules) {
 	let m = require(`./${f}.js`)
